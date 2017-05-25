@@ -10,8 +10,8 @@ class Queue:
 
 class DoublyLinkedList:
     def __init__(self):
-        self.head =
-        self.tail =
+        self.head = DoubleNode(null)
+        self.tail = DoubleNode(null)
         self.head.set_next(self.tail)
         self.prev.set_prev(self.head)
 
@@ -24,8 +24,8 @@ class DoublyLinkedList:
 class DoubleNode:
     def __init__(self, val):
         self.val = val
-        self.prev = nil
-        self.next = nil
+        self.prev = null
+        self.next = null
 
     def remove(self):
         self.prev.next = self.next
