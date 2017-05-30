@@ -13,13 +13,14 @@ class DoublyLinkedList:
         self.head = DoubleNode(null)
         self.tail = DoubleNode(null)
         self.head.set_next(self.tail)
-        self.prev.set_prev(self.head)
+        self.tail.set_prev(self.head)
 
     def push(self, val):
 
     def pop(self):
 
-    def is_empty:
+    def is_empty(self):
+        return self.head.next == self.tail.prev
 
 class DoubleNode:
     def __init__(self, val):
@@ -30,3 +31,9 @@ class DoubleNode:
     def remove(self):
         self.prev.next = self.next
         self.next.prev = self.prev
+
+    def set_prev(self, node):
+        self.prev = node
+
+    def set_next(self, node):
+        self.next = node
