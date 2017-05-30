@@ -1,7 +1,7 @@
 def selection_sort(array)
   i = 0
   while i < array.length
-    min_idx = find_min_idx(array[i..-1])
+    min_idx = find_min_idx(array[i..-1]) + i
     array[i], array[min_idx] = array[min_idx], array[i]
     i += 1
   end
