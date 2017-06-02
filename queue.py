@@ -2,11 +2,14 @@ class Queue:
     def __init__(self):
         self.array = []
 
-    def enqueue(val):
+    def enqueue(self, val):
+        self.array.append(val)
 
-    def dequeue(val):
+    def dequeue(self):
+        return self.array.pop(0)
 
-    def is_empty:
+    def is_empty(self):
+        return self.array.length > 0
 
 class DoublyLinkedList:
     def __init__(self):
@@ -16,8 +19,19 @@ class DoublyLinkedList:
         self.tail.set_prev(self.head)
 
     def push(self, val):
+        node = DoubleNode(val)
+        self.last.set_next(node)
+        self.tail.set_prev(node)
 
     def pop(self):
+        node = self.last
+        new_last = node.prev
+        new_last.set_next(self.tail)
+        self.tail.set_prev(new_last)
+        return node
+
+    def last(self):
+        return self.tail.prev
 
     def is_empty(self):
         return self.head.next == self.tail.prev
