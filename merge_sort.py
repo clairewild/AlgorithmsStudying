@@ -18,3 +18,16 @@ def merge(left, right):
             new_array.append(right[j])
             j += 1
     return new_array + left[i:] + right[j:]
+
+def bottom_up_merge_sort(array):
+    N = len(array)
+    size = 1
+    while size < N:
+        lo = 0
+        while lo < N - size:
+            pointer_merge(array, lo, lo + size - 1, min(lo + size * 2 - 1, N - 1))
+            lo += size * 2
+        size *= 2
+
+def pointer_merge(array, lo, mid, hi):
+    

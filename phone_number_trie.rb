@@ -47,7 +47,7 @@ class PhoneTrie
         current_node = new_node
       end
     end
-    current_node.complete_word = true
+    current_node.words << word
   end
 
   def include?(word)
@@ -61,16 +61,16 @@ class PhoneTrie
         return false
       end
     end
-    current_node.complete_word
+    current_node.words.include?(word)
   end
 end
 
 class Node
-  attr_accessor :num, :complete_word, :children
+  attr_accessor :num, :words, :children
 
   def initialize(num)
     @num = num
-    @complete_word = false
+    @words = []
     @children = []
   end
 
