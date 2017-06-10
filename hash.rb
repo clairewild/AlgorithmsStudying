@@ -1,4 +1,6 @@
 class HashSet
+  include Enumerable
+
   def initialize(num_buckets = 8)
     @store = Array.new(num_buckets) { LinkedList.new }
     @count = 0
@@ -6,6 +8,10 @@ class HashSet
 
   def include?(key)
     bucket(key).include?(key)
+  end
+
+  def get(key)
+    bucket(key).get(key)
   end
 
   def set(key, val)
@@ -20,10 +26,6 @@ class HashSet
     end
   end
 
-  def get(key)
-    bucket(key).get(key)
-  end
-
   def delete(key)
     @count -= 1
     list = bucket(key)
@@ -31,12 +33,20 @@ class HashSet
   end
 
   def each
-
+    @store.each do |list|
+      list.each do |node|
+        yield(node.key node.val)
+      end
+    end
   end
 
   private
   def num_buckets
     @store.length
+  end
+
+  def bucket(key)
+    @store[key.hash % num_buckets]
   end
 
   def resize!
@@ -49,29 +59,77 @@ class HashSet
 
     @store = new_store
   end
-
-  def bucket(key)
-    @store[key.hash % num_buckets]
-  end
 end
 
 class LinkedList
-  def initialize
+  include Enumerable
 
+  def initialize
+    @head = ListNode.new(nil)
+    @tail = ListNode.new(nil)
+    @head.next = @tail
+    @tail.prev = @head
+  end
+
+  def first
+    @head.next
+  end
+
+  def last
+    @tail.prev
   end
 
   def include?(key)
-
+    node = self.get(key)
+    node != nil
   end
 
   def get(key)
-
+    self.each do |node|
+      return node if node.key == key
+    end
+    nil
   end
 
-  def
+  def append(key, val)
+    node = ListNode.new(key, val)
+    node.prev = last
+    node.next = @tail
+    @tail.prev = node
+    last.next = node
+  end
 
+  def update(key, val)
+    node = self.get(key)
+    node.val = val if node
+  end
+
+  def remove(key)
+    node = self.get(key)
+    node.remove if node
+  end
+
+  def each
+    current_node = first
+    until current_node == @tail
+      yield(current_node)
+      current_node = current_node.next
+    end
+  end
 end
 
 class ListNode
+  attr_accessor :next, :prev, :key, :val
 
+  def initialize(key, val)
+    @key = key
+    @val = val
+    @next = nil
+    @prev = nil
+  end
+
+  def remove
+    @prev.next = @next
+    @next.prev = @prev
+  end
 end
