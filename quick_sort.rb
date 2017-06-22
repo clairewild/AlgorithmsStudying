@@ -19,10 +19,3 @@ def partition(arr, left, right)
   arr[i], arr[pivot_idx] = arr[pivot_idx], arr[i] unless arr[i] < pivot
   return i
 end
-
-
-p quick_sort([3,4,5,2,5,7,1,8])
-
-def quick_select(array, k)
-
-end

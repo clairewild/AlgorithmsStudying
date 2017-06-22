@@ -29,5 +29,4 @@ def bottom_up_merge_sort(array):
             lo += size * 2
         size *= 2
 
-def pointer_merge(array, lo, mid, hi):
-    
+# def pointer_merge(array, lo, mid, hi):
